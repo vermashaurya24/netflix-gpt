@@ -6,7 +6,7 @@ const Login = () => {
 
   const toggleSignInForm = () => {
     setIsSignInForm(!isSignInForm);
-  }
+  };
 
   return (
     <div>
@@ -21,6 +21,13 @@ const Login = () => {
         <h1 className="font-bold text-3xl py-4">
           {isSignInForm ? "Sign In" : "Sign Up"}
         </h1>
+        {!isSignInForm && (
+          <input
+            type="text"
+            placeholder="Name"
+            className="p-4 my-4 w-full bg-black rounded-lg bg-opacity-85 border border-white"
+          />
+        )}
         <input
           type="text"
           placeholder="Email Address"
@@ -32,11 +39,17 @@ const Login = () => {
           className="p-4 my-4 w-full bg-black rounded-lg bg-opacity-85 border border-white"
         />
         <button className="p-4 my-6 bg-red-600 w-full rounded-lg">
-          Sign In
+          {isSignInForm ? "Sign In" : "Sign Up"}
         </button>
         <p className="text-gray-400">
-          New to Netflix?{" "}
-          <button type="button" className="hover:underline text-white" onClick={toggleSignInForm}>Sign up now.</button>
+          {isSignInForm ? "New to Netflix?" : "Already have an account?"}{" "}
+          <button
+            type="button"
+            className="hover:underline text-white"
+            onClick={toggleSignInForm}
+          >
+            {isSignInForm ? "Sign up now." : "Sign In."}
+          </button>
         </p>
       </form>
     </div>
