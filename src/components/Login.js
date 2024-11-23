@@ -4,10 +4,13 @@ import { checkValidateData } from "../utils/validate";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorState, setErrorState] = useState({
     name: false,
@@ -38,21 +41,27 @@ const Login = () => {
 
     try {
       if (!isSignInForm) {
-        const userCredential = await createUserWithEmailAndPassword(
+        await createUserWithEmailAndPassword(
           auth,
           email?.current?.value,
           password?.current?.value
-        )
-        console.log(userCredential.user);
+        );
+        await updateProfile(
+          auth.currentUser, 
+          {
+            displayName: name?.current?.value
+          }
+        );
+        navigate("/browse");
       } else {
-        const userCredential = await signInWithEmailAndPassword(
+        await signInWithEmailAndPassword(
           auth,
           email?.current?.value,
           password?.current?.value
-        )
-        console.log(userCredential.user);
+        );
+        navigate("/browse");
       }
-    } catch {
+      } catch {
       setErrorState((prev) => {
         return { ...prev, generic: true };
       });
