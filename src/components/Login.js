@@ -1,6 +1,11 @@
 import React, { useState, useRef } from "react";
 import Header from "./Header";
 import { checkValidateData } from "../utils/validate";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "../utils/firebase";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
@@ -8,6 +13,7 @@ const Login = () => {
     name: false,
     email: false,
     password: false,
+    generic: false,
   });
 
   const toggleSignInForm = () => {
@@ -18,13 +24,39 @@ const Login = () => {
   const email = useRef(null);
   const password = useRef(null);
 
-  const handleSubmitClick = () => {
+  const handleSubmitClick = async () => {
     const errorResponse = checkValidateData(
       name?.current?.value,
       email?.current?.value,
       password?.current?.value
     );
     setErrorState(errorResponse);
+
+    if (errorResponse.name || errorResponse.email || errorResponse.password) {
+      return;
+    }
+
+    try {
+      if (!isSignInForm) {
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          email?.current?.value,
+          password?.current?.value
+        )
+        console.log(userCredential.user);
+      } else {
+        const userCredential = await signInWithEmailAndPassword(
+          auth,
+          email?.current?.value,
+          password?.current?.value
+        )
+        console.log(userCredential.user);
+      }
+    } catch {
+      setErrorState((prev) => {
+        return { ...prev, generic: true };
+      });
+    }
   };
 
   return (
@@ -52,11 +84,13 @@ const Login = () => {
               type="text"
               placeholder="Name"
               className={`p-4 my-4 w-full bg-black rounded-lg bg-opacity-50 border ${
-                errorState.name ? "border-red-600" : "border-white"
+                errorState.name || errorState.generic ? "border-red-600" : "border-white"
               }`}
             />
             {errorState.name && (
-              <p className="font-bold text-red-500 mx-4">Name can not be empty</p>
+              <p className="font-bold text-red-500 mx-4">
+                Name can not be empty
+              </p>
             )}
           </div>
         )}
@@ -65,7 +99,7 @@ const Login = () => {
           type="text"
           placeholder="Email Address"
           className={`p-4 my-4 w-full bg-black rounded-lg bg-opacity-50 border ${
-            errorState.email ? "border-red-600" : "border-white"
+            errorState.email || errorState.generic ? "border-red-600" : "border-white"
           }`}
         />
         {errorState.email && (
@@ -76,12 +110,17 @@ const Login = () => {
           type="password"
           placeholder="Password"
           className={`p-4 my-4 w-full bg-black rounded-lg bg-opacity-50 border ${
-            errorState.password ? "border-red-600" : "border-white"
+            errorState.password || errorState.generic ? "border-red-600" : "border-white"
           }`}
         />
         {errorState.password && (
           <p className="font-bold text-red-500 mx-4">Password is not valid</p>
         )}
+        {errorState.generic && (isSignInForm ? (
+          <p className="font-bold text-red-500 mx-4">Invalid Username or Password!</p>
+        ) : (
+          <p className="font-bold text-red-500 mx-4">Account already exists with the same email!</p>
+        ))}
         <button
           className="p-4 my-6 bg-red-600 w-full rounded-lg"
           onClick={handleSubmitClick}
