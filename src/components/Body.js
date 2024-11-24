@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react'
 import Login from './Login'
 import Browse from './Browse'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from '../utils/firebase'
 import { removeUserDetails, saveUserDetails } from '../utils/tokens'
+import Header from './Header'
 
 const Body = () => {
     useEffect(()=>{
@@ -18,22 +19,33 @@ const Body = () => {
         })
     }, [])
 
-    const appRouter = createBrowserRouter([
-        {
-            path: "/",
-            element: <Login />
-        },
-        {
-            path: "/browse",
-            element: <Browse />
-        }
-    ]);
-
   return (
     <div>
-        <RouterProvider router={appRouter} />
+        <Header />
+        <Outlet />
     </div>
   )
-}
+};
 
-export default Body
+const appRouter = createBrowserRouter([
+    {
+        path: "/",
+        element: <Body />,
+        children: [
+            {
+                path: "/",
+                element: <Login />
+            },
+            {
+                path: "/browse",
+                element: <Browse />
+            }
+        ]
+    },
+]);
+
+const App = () => {
+    return <RouterProvider router={appRouter} />;
+};
+
+export default App;
