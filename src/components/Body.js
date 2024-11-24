@@ -1,20 +1,20 @@
 import React, { useEffect } from 'react'
 import Login from './Login'
 import Browse from './Browse'
-import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, Outlet, RouterProvider, useNavigate } from 'react-router-dom'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from '../utils/firebase'
-import { removeUserDetails, saveUserDetails } from '../utils/tokens'
 import Header from './Header'
 
 const Body = () => {
+    const navigate = useNavigate();
     useEffect(()=>{
-        onAuthStateChanged(auth, (user) => {
-            if(user) {
-                saveUserDetails(user);
+        onAuthStateChanged(auth, () => {
+            if(auth.currentUser) {
+                navigate("/browse");
             }
             else {
-                removeUserDetails();
+                navigate("/")
             }
         })
     }, [])
