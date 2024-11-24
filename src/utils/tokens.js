@@ -5,11 +5,11 @@ export const saveUserDetails = (user) => {
         tokens: user.stsTokenManager,
         uid: user.uid
     };
-    window.sessionStorage.setItem("signedInUser", details);
+    window.sessionStorage.setItem("signedInUser", JSON.stringify(details));
 }
 
 export const getUserDetails = () => {
-    return window.sessionStorage.getItem("signedInUser");
+    return JSON.parse(window.sessionStorage.getItem("signedInUser"));
 };
 
 export const removeUserDetails = () => {
