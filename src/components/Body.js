@@ -9,7 +9,7 @@ import Header from './Header'
 const Body = () => {
     const navigate = useNavigate();
     useEffect(()=>{
-        onAuthStateChanged(auth, () => {
+        const unsubscribe = onAuthStateChanged(auth, () => {
             if(auth.currentUser) {
                 navigate("/browse");
             }
@@ -17,7 +17,8 @@ const Body = () => {
                 navigate("/")
             }
         })
-    }, [])
+        return () => unsubscribe();
+    }, [navigate]);
 
   return (
     <div>
