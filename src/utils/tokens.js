@@ -5,13 +5,13 @@ export const saveUserDetails = (user) => {
         tokens: user.stsTokenManager,
         uid: user.uid
     };
-    window.localStorage.setItem("signedInUser", details);
+    window.sessionStorage.setItem("signedInUser", details);
 }
 
 export const getUserDetails = () => {
-    return window.localStorage.getItem("signedInUser");
+    return window.sessionStorage.getItem("signedInUser");
 };
 
 export const removeUserDetails = () => {
-    window.localStorage.removeItem("signedInUser");
+    window.sessionStorage.removeItem("signedInUser");
 }
