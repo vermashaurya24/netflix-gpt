@@ -25,7 +25,7 @@ const Body = () => {
         <Header />
         <Outlet />
     </div>
-  )
+  );
 };
 
 const appRouter = createBrowserRouter([

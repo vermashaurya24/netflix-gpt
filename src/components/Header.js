@@ -19,6 +19,7 @@ const Header = () => {
       </div>
       {auth.currentUser && <div className='flex items-center text-white'>
         <p className='m-2'>Welcome, {auth.currentUser.displayName}</p>
+        <span>|</span>
         <button className='m-2 hover:underline' onClick={handleSignoutClick}>Sign Out</button>
       </div>}
     </div>
