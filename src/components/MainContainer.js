@@ -4,19 +4,18 @@ import VideoTitle from './VideoTitle';
 import VideoBackground from './VideoBackground';
 
 const MainContainer = () => {
-  const movies = useSelector(state => state.movies?.nowPlayingMovies);
+  const movies = useSelector(state => state?.movies?.nowPlayingMovies);
   if(!movies) {
     return;
   }
-  const movieIndex = Math.floor(Math.random()*20) + 1;
-  const mainMovie = movies[movieIndex];
-  const {original_title, overview} = mainMovie;
+  const mainMovie = movies[0];
+  const {original_title, overview, id} = mainMovie || {};
   return (
     <div>
       <VideoTitle title={original_title} overview={overview} />
-      <VideoBackground />
+      <VideoBackground movieId={id} />
     </div>
   )
 }
 
-export default MainContainer
+export default MainContainer;
