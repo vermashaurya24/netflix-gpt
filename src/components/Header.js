@@ -2,14 +2,20 @@ import React from 'react';
 import { auth } from '../utils/firebase';
 import { signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import {toggleGPTSearch} from "../utils/gptSlice";
 
 const Header = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleSignoutClick = async () => {
     try {
       await signOut(auth);
       navigate("/")
     } catch {}
+  };
+  const handleToggleGPTSearch = () => {
+    dispatch(toggleGPTSearch());
   }
 
   return (
@@ -19,6 +25,8 @@ const Header = () => {
       </div>
       {auth.currentUser && <div className='flex items-center text-white'>
         <p className='m-2'>Welcome, {auth.currentUser.displayName}</p>
+        <span>|</span>
+        <button className='m-2 bg-purple-800 hover:bg-purple-600 px-4 py-1 rounded-lg' onClick={handleToggleGPTSearch}>GPT Search</button>
         <span>|</span>
         <button className='m-2 hover:underline' onClick={handleSignoutClick}>Sign Out</button>
       </div>}
