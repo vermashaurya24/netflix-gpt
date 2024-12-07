@@ -8,6 +8,7 @@ import {
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
+import { BG_URL } from "../utils/constants";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -73,7 +74,7 @@ const Login = () => {
       <Header />
       <div className="absolute">
         <img
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/03ad76d1-e184-4d99-ae7d-708672fa1ac2/web/NP-en-20241111-TRIFECTA-perspective_bf5889d0-60a0-48cd-ab7a-cd61c9650f89_large.jpg"
+          src={BG_URL}
           alt="logo"
         />
       </div>

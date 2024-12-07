@@ -1,1 +1,2 @@
 export const POSTER_URL = "https://image.tmdb.org/t/p/w500";
+export const BG_URL = "https://assets.nflxext.com/ffe/siteui/vlv3/03ad76d1-e184-4d99-ae7d-708672fa1ac2/web/NP-en-20241111-TRIFECTA-perspective_bf5889d0-60a0-48cd-ab7a-cd61c9650f89_large.jpg";
