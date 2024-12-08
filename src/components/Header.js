@@ -6,11 +6,13 @@ import { useDispatch } from 'react-redux';
 import {toggleGPTSearch} from "../utils/gptSlice";
 import { changeLanguage } from '../utils/configSlice';
 import { useSelector } from 'react-redux';
+import { lang } from '../utils/languageConstants';
 
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const showGPTSearch = useSelector(store => store?.gpt?.showGPTSearch);
+  const currentLanguage = useSelector(store => store?.config?.language);
   const handleSignoutClick = async () => {
     try {
       await signOut(auth);
@@ -30,18 +32,18 @@ const Header = () => {
         <img className='w-44' src='https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png' alt='logo' />
       </div>
         <div className='flex items-center text-white'>
-        <select className='bg-gray-900 text-white p-2 rounded-md' onClick={changePreferredLanguage}>
+        <select className='bg-gray-900 text-white p-2 rounded-md' onClick={changePreferredLanguage} value={currentLanguage}>
           <option value="en">English</option>
           <option value="nepali">Nepali</option>
           <option value="hindi">Hindi</option>
           <option value="es">Spanish</option>
         </select>
         {auth.currentUser && <>
-          <p className='m-2'>Welcome, {auth.currentUser.displayName}</p>
+          <p className='m-2'>{lang[currentLanguage]?.headerText?.welcomeText}, {auth.currentUser.displayName}</p>
           <span>|</span>
           <button className='m-2 bg-purple-800 hover:bg-purple-600 px-4 py-1 rounded-lg' onClick={handleToggleGPTSearch}>{showGPTSearch ? "Browse" : "GPT Search"}</button>
           <span>|</span>
-          <button className='m-2 hover:underline' onClick={handleSignoutClick}>Sign Out</button>
+          <button className='m-2 bg-red-700 hover:bg-red-600 px-4 py-1 rounded-lg' onClick={handleSignoutClick}>{lang[currentLanguage]?.headerText?.signOutButtonText}</button>
         </>}
         </div>
     </div>

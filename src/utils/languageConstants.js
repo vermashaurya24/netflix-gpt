@@ -18,6 +18,10 @@ export const lang = {
         nameErrorText: "Name can not be empty",
         emailErrorText: "Email is not valid",
         passwordErrorText: "Password is not valid",
+        headerText: {
+            welcomeText: "Welcome",
+            signOutButtonText: "Sign Out",
+        }
     },
     hindi: {
         searchText: "खोजिए",
@@ -37,7 +41,11 @@ export const lang = {
         passwordFieldText: "पासवर्ड",
         nameErrorText: "नाम खाली नहीं हो सकता",
         emailErrorText: "ईमेल सही नहीं है",
-        passwordErrorText: "पासवर्ड सही नहीं है"
+        passwordErrorText: "पासवर्ड सही नहीं है",
+        headerText: {
+            welcomeText: "स्वागत",
+            signOutButtonText: "साइन आउट",
+        }
     },
     nepali: {
         searchText: "खोज्नुहोस्",
@@ -57,7 +65,11 @@ export const lang = {
         passwordFieldText: "पासवर्ड",
         nameErrorText: "नाम खाली हुन सक्दैन",
         emailErrorText: "इमेल सही होइन",
-        passwordErrorText: "पासवर्ड सही होइन"
+        passwordErrorText: "पासवर्ड सही होइन",
+        headerText: {
+            welcomeText: "स्वागत",
+            signOutButtonText: "साइन आउट",
+        }
     },
     es: {
         searchText: "Buscar",
@@ -77,6 +89,10 @@ export const lang = {
         passwordFieldText: "Contraseña",
         nameErrorText: "El nombre no puede estar vacío",
         emailErrorText: "El correo electrónico no es válido",
-        passwordErrorText: "La contraseña no es válida"
+        passwordErrorText: "La contraseña no es válida",
+        headerText: {
+            welcomeText: "Bienvenido",
+            signOutButtonText: "Cerrar sesión",
+        }
     }    
 };
