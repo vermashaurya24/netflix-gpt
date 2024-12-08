@@ -1,17 +1,21 @@
 import React, { useState, useRef } from "react";
-import Header from "./Header";
-import { checkValidateData } from "../utils/validate";
+import { useSelector } from "react-redux";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   updateProfile
 } from "firebase/auth";
+import { checkValidateData } from "../utils/validate";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { BG_URL } from "../utils/constants";
+import { lang } from "../utils/languageConstants";
+
+import Header from "./Header";
 
 const Login = () => {
   const navigate = useNavigate();
+  const currentLanguage = useSelector(state => state.config?.language);
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorState, setErrorState] = useState({
     name: false,
@@ -85,21 +89,21 @@ const Login = () => {
         className="absolute w-4/12 p-12 bg-black mt-36 mx-auto right-0 left-0 text-white rounded-xl bg-opacity-80"
       >
         <h1 className="font-bold text-3xl py-4">
-          {isSignInForm ? "Sign In" : "Sign Up"}
+          {isSignInForm ? lang[currentLanguage]?.signIn.buttonText : lang[currentLanguage]?.signUp.buttonText}
         </h1>
         {!isSignInForm && (
           <div>
             <input
               ref={name}
               type="text"
-              placeholder="Name"
+              placeholder={lang[currentLanguage].nameFieldText}
               className={`p-4 my-4 w-full bg-black rounded-lg bg-opacity-50 border ${
                 errorState.name || errorState.generic ? "border-red-600" : "border-white"
               }`}
             />
             {errorState.name && (
               <p className="font-bold text-red-500 mx-4">
-                Name can not be empty
+                {lang[currentLanguage]?.nameErrorText}
               </p>
             )}
           </div>
@@ -107,44 +111,44 @@ const Login = () => {
         <input
           ref={email}
           type="text"
-          placeholder="Email Address"
+          placeholder={lang[currentLanguage]?.emailFieldText}
           className={`p-4 my-4 w-full bg-black rounded-lg bg-opacity-50 border ${
             errorState.email || errorState.generic ? "border-red-600" : "border-white"
           }`}
         />
         {errorState.email && (
-          <p className="font-bold text-red-500 mx-4">Email is not valid</p>
+          <p className="font-bold text-red-500 mx-4">{lang[currentLanguage]?.emailErrorText}</p>
         )}
         <input
           ref={password}
           type="password"
-          placeholder="Password"
+          placeholder={lang[currentLanguage]?.passwordFieldText}
           className={`p-4 my-4 w-full bg-black rounded-lg bg-opacity-50 border ${
             errorState.password || errorState.generic ? "border-red-600" : "border-white"
           }`}
         />
         {errorState.password && (
-          <p className="font-bold text-red-500 mx-4">Password is not valid</p>
+          <p className="font-bold text-red-500 mx-4">{lang[currentLanguage]?.passwordErrorText}</p>
         )}
         {errorState.generic && (isSignInForm ? (
-          <p className="font-bold text-red-500 mx-4">Invalid Username or Password!</p>
+          <p className="font-bold text-red-500 mx-4">{lang[currentLanguage]?.signIn.genericErrorText}</p>
         ) : (
-          <p className="font-bold text-red-500 mx-4">Account already exists with the same email!</p>
+          <p className="font-bold text-red-500 mx-4">{lang[currentLanguage]?.signUp.genericErrorText}</p>
         ))}
         <button
           className="p-4 my-6 bg-red-600 w-full rounded-lg"
           onClick={handleSubmitClick}
         >
-          {isSignInForm ? "Sign In" : "Sign Up"}
+          {isSignInForm ? lang[currentLanguage]?.signIn.buttonText : lang[currentLanguage]?.signUp.buttonText}
         </button>
         <p className="text-gray-400">
-          {isSignInForm ? "New to Netflix?" : "Already have an account?"}{" "}
+          {isSignInForm ? lang[currentLanguage]?.signIn.bottomText : lang[currentLanguage]?.signUp.bottomText}{" "}
           <button
             type="button"
             className="hover:underline text-white"
             onClick={toggleSignInForm}
           >
-            {isSignInForm ? "Sign up now." : "Sign In."}
+            {isSignInForm ? lang[currentLanguage]?.signUp.buttonText : lang[currentLanguage]?.signIn.buttonText}
           </button>
         </p>
       </form>

@@ -29,13 +29,13 @@ const Header = () => {
       <div>
         <img className='w-44' src='https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png' alt='logo' />
       </div>
-      {auth.currentUser && <div className='flex items-center text-white'>
-        {showGPTSearch && <select className='bg-gray-900 text-white p-2 rounded-md' onClick={changePreferredLanguage}>
+        <select className='bg-gray-900 text-white p-2 rounded-md' onClick={changePreferredLanguage}>
           <option value="en">English</option>
           <option value="nepali">Nepali</option>
           <option value="hindi">Hindi</option>
           <option value="es">Spanish</option>
-        </select>}
+        </select>
+      {auth.currentUser && <div className='flex items-center text-white'>
         <p className='m-2'>Welcome, {auth.currentUser.displayName}</p>
         <span>|</span>
         <button className='m-2 bg-purple-800 hover:bg-purple-600 px-4 py-1 rounded-lg' onClick={handleToggleGPTSearch}>{showGPTSearch ? "Browse" : "GPT Search"}</button>
