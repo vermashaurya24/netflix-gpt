@@ -1,7 +1,7 @@
 export const lang = {
     en: {
         searchText: "Search",
-        gptInputFieldText: "What would you like to watch today?",
+        geminiInputFieldText: "What would you like to watch today?",
         signIn: {
             buttonText: "Sign In",
             bottomText: "New to Netflix?",
@@ -25,7 +25,7 @@ export const lang = {
     },
     hindi: {
         searchText: "खोजिए",
-        gptInputFieldText: "आप आज क्या देखना चाहेंगे?",
+        geminiInputFieldText: "आप आज क्या देखना चाहेंगे?",
         signIn: {
             buttonText: "साइन इन करें",
             bottomText: "नेटफ्लिक्स पर नए हैं?",
@@ -49,7 +49,7 @@ export const lang = {
     },
     nepali: {
         searchText: "खोज्नुहोस्",
-        gptInputFieldText: "आज तपाईं के हेर्न चाहनुहुन्छ?",
+        geminiInputFieldText: "आज तपाईं के हेर्न चाहनुहुन्छ?",
         signIn: {
             buttonText: "साइन इन गर्नुहोस्",
             bottomText: "नेटफ्लिक्स मा नयाँ हुनुहुन्छ?",
@@ -73,7 +73,7 @@ export const lang = {
     },
     es: {
         searchText: "Buscar",
-        gptInputFieldText: "¿Qué te gustaría ver hoy?",
+        geminiInputFieldText: "¿Qué te gustaría ver hoy?",
         signIn: {
             buttonText: "Iniciar sesión",
             bottomText: "¿Nuevo en Netflix?",

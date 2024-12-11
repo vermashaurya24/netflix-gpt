@@ -3,7 +3,7 @@ import { auth } from '../utils/firebase';
 import { signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import {toggleGPTSearch} from "../utils/gptSlice";
+import {toggleGeminiSearch} from "../utils/geminiSlice";
 import { changeLanguage } from '../utils/configSlice';
 import { useSelector } from 'react-redux';
 import { lang } from '../utils/languageConstants';
@@ -11,7 +11,7 @@ import { lang } from '../utils/languageConstants';
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const showGPTSearch = useSelector(store => store?.gpt?.showGPTSearch);
+  const showGeminiSearch = useSelector(store => store?.gemini?.showGeminiSearch);
   const currentLanguage = useSelector(store => store?.config?.language);
   const handleSignoutClick = async () => {
     try {
@@ -19,8 +19,8 @@ const Header = () => {
       navigate("/")
     } catch {}
   };
-  const handleToggleGPTSearch = () => {
-    dispatch(toggleGPTSearch());
+  const handleToggleGeminiSearch = () => {
+    dispatch(toggleGeminiSearch());
   }
   const changePreferredLanguage = (e) => {
     dispatch(changeLanguage(e.target.value));
@@ -41,7 +41,7 @@ const Header = () => {
         {auth.currentUser && <>
           <p className='m-2'>{lang[currentLanguage]?.headerText?.welcomeText}, {auth.currentUser.displayName}</p>
           <span>|</span>
-          <button className='m-2 bg-purple-800 hover:bg-purple-600 px-4 py-1 rounded-lg' onClick={handleToggleGPTSearch}>{showGPTSearch ? "Browse" : "GPT Search"}</button>
+          <button className='m-2 bg-purple-800 hover:bg-purple-600 px-4 py-1 rounded-lg' onClick={handleToggleGeminiSearch}>{showGeminiSearch ? "Browse" : "Gemini Search"}</button>
           <span>|</span>
           <button className='m-2 bg-red-700 hover:bg-red-600 px-4 py-1 rounded-lg' onClick={handleSignoutClick}>{lang[currentLanguage]?.headerText?.signOutButtonText}</button>
         </>}

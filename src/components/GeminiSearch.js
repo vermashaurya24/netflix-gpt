@@ -1,9 +1,9 @@
 import React from 'react';
-import GPTSearchBar from './GPTSearchBar';
-import GPTMovieSuggestions from './GPTMovieSuggestions';
+import GeminiSearchBar from './GeminiSearchBar';
+import GeminiMovieSuggestions from './GeminiMovieSuggestions';
 import { BG_URL } from '../utils/constants';
 
-const GPTSearch = () => {
+const GeminiSearch = () => {
   return (
     <div>
       <div className="absolute -z-10">
@@ -12,10 +12,10 @@ const GPTSearch = () => {
           alt="logo"
         />
       </div>
-      <GPTSearchBar />
-      <GPTMovieSuggestions />
+      <GeminiSearchBar />
+      <GeminiMovieSuggestions />
     </div>
   );
 };
 
-export default GPTSearch;
+export default GeminiSearch;
