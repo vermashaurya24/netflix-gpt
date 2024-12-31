@@ -1,12 +1,9 @@
-import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { addNowPlayingMovies } from "../utils/movieSlice";
+import { useQuery } from "@tanstack/react-query";
 
 const useNowPlayingMovies = () => {
   const dispatch = useDispatch();
-  useEffect(() => {
-    fetchNowPlayingMovies();
-  }, []);
 
   const fetchNowPlayingMovies = async () => {
     try {
@@ -19,10 +16,18 @@ const useNowPlayingMovies = () => {
         },
       };
       const response = await fetch(url, options);
-      const data = await response.json();
-      dispatch(addNowPlayingMovies(data.results));
+      return response.json();
     } catch {}
   };
+
+  const {data, isLoading} = useQuery({
+    queryKey: [],
+    queryFn: fetchNowPlayingMovies
+  });
+
+  if(!isLoading) {
+    dispatch(addNowPlayingMovies(data.results));
+  }
 };
 
 export default useNowPlayingMovies;
