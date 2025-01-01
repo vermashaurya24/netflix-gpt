@@ -1,12 +1,9 @@
-import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { addTopRatedMovies } from "../utils/movieSlice";
+import { useQuery } from "@tanstack/react-query";
 
 const useTopRatedMovies = () => {
   const dispatch = useDispatch();
-  useEffect(() => {
-    fetchTopRatedMovies();
-  }, []);
 
   const fetchTopRatedMovies = async () => {
     try {
@@ -19,10 +16,18 @@ const useTopRatedMovies = () => {
         },
       };
       const response = await fetch(url, options);
-      const data = await response.json();
-      dispatch(addTopRatedMovies(data.results));
+      return await response.json();
     } catch {}
   };
+
+  const {data, isLoading} = useQuery({
+    queryKey: ["useTopRatedMovies"],
+    queryFn: fetchTopRatedMovies
+  });
+
+  if(!isLoading) {
+    dispatch(addTopRatedMovies(data.results));
+  }
 };
 
 export default useTopRatedMovies;

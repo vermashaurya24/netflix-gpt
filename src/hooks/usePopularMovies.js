@@ -1,12 +1,9 @@
-import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { addPopularMovies } from "../utils/movieSlice";
+import { useQuery } from "@tanstack/react-query";
 
 const usePopularMovies = () => {
   const dispatch = useDispatch();
-  useEffect(() => {
-    fetchPopularMovies();
-  }, []);
 
   const fetchPopularMovies = async () => {
     try {
@@ -19,10 +16,18 @@ const usePopularMovies = () => {
         },
       };
       const response = await fetch(url, options);
-      const data = await response.json();
-      data.results.reverse();
-      dispatch(addPopularMovies(data.results));
+      return response.json();
     } catch {}
+  };
+
+  const {data, isLoading} = useQuery({
+    queryKey: ["usePopularMovies"],
+    queryFn: fetchPopularMovies
+  });
+
+  if(!isLoading) {
+    const reversedResults = [...data.results].reverse();
+    dispatch(addPopularMovies(reversedResults));
   };
 };
 

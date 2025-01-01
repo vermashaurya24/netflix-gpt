@@ -21,7 +21,7 @@ const useNowPlayingMovies = () => {
   };
 
   const {data, isLoading} = useQuery({
-    queryKey: [],
+    queryKey: ["useNowPlayingMovies"],
     queryFn: fetchNowPlayingMovies
   });
 
