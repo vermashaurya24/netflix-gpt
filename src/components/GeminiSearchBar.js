@@ -7,7 +7,7 @@ const GeminiSearchBar = () => {
   return (
     <div className="pt-[10%] flex justify-center z-10">
       <form
-        className="w-1/2 bg-black bg-opacity-80 rounded-xl grid grid-cols-12"
+        className="w-full sm:w-1/2 bg-black bg-opacity-80 rounded-xl grid grid-cols-12 mx-4 sm:mx-0"
         onSubmit={(e) => e.preventDefault()}
       >
         <input

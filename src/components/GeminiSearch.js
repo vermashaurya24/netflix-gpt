@@ -6,14 +6,17 @@ import { BG_URL } from '../utils/constants';
 const GeminiSearch = () => {
   return (
     <div>
-      <div className="fixed -z-10">
+      <div className="absolute -z-10 w-full h-screen overflow-hidden">
         <img
+          className='h-screen w-full object-cover'
           src={BG_URL}
           alt="logo"
         />
       </div>
-      <GeminiSearchBar />
-      <GeminiMovieSuggestions />
+      <div className='pt-56 sm:pt-24 md:pt-6'>
+        <GeminiSearchBar />
+        <GeminiMovieSuggestions />
+      </div>
     </div>
   );
 };
