@@ -54,14 +54,14 @@ const Header = () => {
               {lang[currentLanguage]?.headerText?.welcomeText},{" "}
               {auth.currentUser.displayName}
             </p>
-            <span className="invisible sm:visible">|</span>
+            <span className="hidden sm:block">|</span>
             <button
               className="m-2 bg-purple-800 hover:bg-purple-600 px-4 py-1 rounded-lg"
               onClick={handleToggleGeminiSearch}
             >
               {showGeminiSearch ? "Browse" : "Gemini Search"}
             </button>
-            <span className="invisible sm:visible">|</span>
+            <span className="hidden sm:block">|</span>
             <button
               className="m-2 bg-red-700 hover:bg-red-600 px-4 py-1 rounded-lg"
               onClick={handleSignoutClick}
