@@ -32,12 +32,12 @@ const Header = () => {
     <div className="flex flex-col md:flex-row justify-between w-full absolute px-8 py-2 bg-gradient-to-b from-black z-10">
       <div>
         <img
-          className="w-44"
+          className="w-44 mx-auto md:mx-0"
           src="https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png"
           alt="logo"
         />
       </div>
-      <div className="flex items-center text-white">
+      <div className="flex flex-col sm:flex-row items-center text-white mx-auto md:mx-0">
         <select
           className="bg-gray-900 text-white p-2 rounded-md"
           onClick={changePreferredLanguage}
@@ -54,14 +54,14 @@ const Header = () => {
               {lang[currentLanguage]?.headerText?.welcomeText},{" "}
               {auth.currentUser.displayName}
             </p>
-            <span>|</span>
+            <span className="invisible sm:visible">|</span>
             <button
               className="m-2 bg-purple-800 hover:bg-purple-600 px-4 py-1 rounded-lg"
               onClick={handleToggleGeminiSearch}
             >
               {showGeminiSearch ? "Browse" : "Gemini Search"}
             </button>
-            <span>|</span>
+            <span className="invisible sm:visible">|</span>
             <button
               className="m-2 bg-red-700 hover:bg-red-600 px-4 py-1 rounded-lg"
               onClick={handleSignoutClick}
