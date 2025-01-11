@@ -20,7 +20,8 @@ const GeminiSearchBar = () => {
           className="py-2 px-4 m-2 bg-red-600 col-span-3 text-white rounded-lg"
           onClick={handleGeminiSearch}
         >
-          {lang[currentLanguage]?.searchText}
+          <span className="hidden sm:inline">{lang[currentLanguage]?.searchText}</span>
+          <span className="inline sm:hidden">🔍</span>
         </button>
       </form>
     </div>
